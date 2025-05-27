@@ -1,23 +1,44 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
 function App() {
+  const choices = ['Rock', 'Paper', 'Scissors'];
+  const [playerChoice, setPlayerChoice] = useState('');
+  const [computerChoice, setComputerChoice] = useState('');
+  const [result, setResult] = useState('');
+
+  const play = (choice) => {
+    const compChoice = choices[Math.floor(Math.random() * choices.length)];
+    setPlayerChoice(choice);
+    setComputerChoice(compChoice);
+
+    if (choice === compChoice) {
+      setResult("It's a draw!");
+    } else if (
+      (choice === 'Rock' && compChoice === 'Scissors') ||
+      (choice === 'Paper' && compChoice === 'Rock') ||
+      (choice === 'Scissors' && compChoice === 'Paper')
+    ) {
+      setResult('You win!');
+    } else {
+      setResult('You lose!');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header">
+      <h1>Rock Paper Scissors</h1>
+      <div>
+        {choices.map((choice) => (
+          <button key={choice} onClick={() => play(choice)} style={{ margin: '10px', padding: '10px 20px' }}>
+            {choice}
+          </button>
+        ))}
+      </div>
+      <div>
+        <p>Your choice: {playerChoice}</p>
+        <p>Computer's choice: {computerChoice}</p>
+        <h2>{result}</h2>
+      </div>
     </div>
   );
 }
