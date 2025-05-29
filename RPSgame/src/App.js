@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import './App.css';
+
 function App() {
   const choices = ['Rock', 'Paper', 'Scissors'];
   const [playerChoice, setPlayerChoice] = useState('');
   const [computerChoice, setComputerChoice] = useState('');
   const [result, setResult] = useState('');
+  const [shake, setShake] = useState(-1);
 
   const play = (choice) => {
     const compChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -28,8 +30,9 @@ function App() {
     <div className="App-header">
       <h1>Rock Paper Scissors</h1>
       <div>
-        {choices.map((choice) => (
-          <button key={choice} onClick={() => play(choice)} style={{ margin: '10px', padding: '10px 20px' }}>
+        {choices.map((choice,index) => (
+          <button className={shake === index 
+            ? "shaking" : ""} key={choice} onClick={() => {play(choice); setShake(index); console.log(index)}}>
             {choice}
           </button>
         ))}

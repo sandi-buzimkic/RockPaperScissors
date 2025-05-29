@@ -12,6 +12,9 @@
   .App-logo {
     animation: App-logo-spin infinite 0.1s linear;
   }
+  .shaking {
+    animation: shake 0.2s linear 10;
+  }
 }
 
 .App-header {
@@ -36,4 +39,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes shake {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(5deg); }
+  50%  { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100%  { transform: rotate(0deg); }
 }
